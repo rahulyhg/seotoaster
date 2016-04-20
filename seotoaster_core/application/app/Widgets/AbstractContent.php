@@ -56,13 +56,13 @@ abstract class Widgets_AbstractContent extends Widgets_Abstract
 
         $containerId = ($this->_container !== null) ? $this->_container->getId() : null;
         if ($containerId) {
-            return '<a class="tpopup generator-links '.$currentClass.'" data-pwidth="'.$width.'" data-pheight="'.$height
+            return '<a class="tpopup generator-links edit-content '.$currentClass.'" data-pwidth="'.$width.'" data-pheight="'.$height
                 .'" title="Click to '.$hint.'" href="javascript:;" data-url="'.$this->_toasterOptions['websiteUrl']
                 .'backend/backend_content/edit/id/'.$containerId.'/containerType/'.$this->_type
                 .'"></a>';
         }
 
-        return '<a class="tpopup generator-links '.$currentClass.'" data-pwidth="'.$width.'" data-pheight="'.$height.'" title="Click to '
+        return '<a class="tpopup generator-links edit-content '.$currentClass.'" data-pwidth="'.$width.'" data-pheight="'.$height.'" title="Click to '
             .$hint.'" href="javascript:;" data-url="'.$this->_toasterOptions['websiteUrl']
             .'backend/backend_content/add/containerType/'.$this->_type.'/containerName/'.$this->_name.'/pageId/'
             .$this->_toasterOptions['id'].'"></a>';
