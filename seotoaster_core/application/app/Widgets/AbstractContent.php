@@ -37,28 +37,16 @@ abstract class Widgets_AbstractContent extends Widgets_Abstract
         if (end($this->_options) == self::OPTION_READONLY || end($this->_options) == self::OPTION_HREF) {
             return false;
         }
-
-        $content = 'edit-c';
-        $sContent = 'edit-sc';
-        $headerContent = 'edit-h';
-        $sHeaderContent = 'edit-sh';
-
-        $currentClass = Application_Model_Models_Container::TYPE_REGULARCONTENT;
-        switch ($this->_type) {
-            case 1:
-                $currentClass = $content;
-                break;
-            case 2:
-                $currentClass = $sContent;
-                break;
-            case 3:
-                $currentClass = $headerContent;
-                break;
-            case 4:
-                $currentClass = $sHeaderContent;
-                break;
+        $containersClasses = array(
+            1 => 'edit-c',
+            2 => 'edit-sc',
+            3 => 'edit-h',
+            4 => 'edit-sh'
+        );
+        $currentClass = '';
+        if(array_key_exists($this->_type, $containersClasses)){
+            $currentClass = $containersClasses[$this->_type];
         }
-
 
         $widgetName   = explode('_', get_called_class());
         $widgetName   = strtolower(end($widgetName));
