@@ -38,32 +38,46 @@ abstract class Widgets_AbstractContent extends Widgets_Abstract
             return false;
         }
 
-        $controlIcon = 'editadd';
-        if (in_array('static', $this->_options)) {
-            $controlIcon .= '-static';
+        $content = 'edit-c';
+        $sContent = 'edit-sc';
+        $headerContent = 'edit-h';
+        $sHeaderContent = 'edit-sh';
+
+        $currentClass = Application_Model_Models_Container::TYPE_REGULARCONTENT;
+        switch ($this->_type) {
+            case 1:
+                $currentClass = $content;
+                break;
+            case 2:
+                $currentClass = $sContent;
+                break;
+            case 3:
+                $currentClass = $headerContent;
+                break;
+            case 4:
+                $currentClass = $sHeaderContent;
+                break;
         }
+
 
         $widgetName   = explode('_', get_called_class());
         $widgetName   = strtolower(end($widgetName));
-        $controlIcon .= '-'.$widgetName.'.png';
         if (!$hint) {
             $hint = 'edit '.($widgetName == 'content' ? '' : $widgetName).' content';
         }
 
         $containerId = ($this->_container !== null) ? $this->_container->getId() : null;
         if ($containerId) {
-            return '<a class="tpopup generator-links" data-pwidth="'.$width.'" data-pheight="'.$height
+            return '<a class="tpopup generator-links '.$currentClass.'" data-pwidth="'.$width.'" data-pheight="'.$height
                 .'" title="Click to '.$hint.'" href="javascript:;" data-url="'.$this->_toasterOptions['websiteUrl']
                 .'backend/backend_content/edit/id/'.$containerId.'/containerType/'.$this->_type
-                .'"><img width="26" height="26" src="'.$this->_toasterOptions['websiteUrl'].'system/images/'
-                .$controlIcon.'" alt="'.$hint.'" /></a>';
+                .'"></a>';
         }
 
-        return '<a class="tpopup generator-links" data-pwidth="'.$width.'" data-pheight="'.$height.'" title="Click to '
+        return '<a class="tpopup generator-links '.$currentClass.'" data-pwidth="'.$width.'" data-pheight="'.$height.'" title="Click to '
             .$hint.'" href="javascript:;" data-url="'.$this->_toasterOptions['websiteUrl']
             .'backend/backend_content/add/containerType/'.$this->_type.'/containerName/'.$this->_name.'/pageId/'
-            .$this->_toasterOptions['id'].'"><img width="26" height="26" src="'.$this->_toasterOptions['websiteUrl']
-            .'system/images/'.$controlIcon.'" alt="'.$hint.'" /></a>';
+            .$this->_toasterOptions['id'].'"></a>';
     }
 
     protected function _find()
