@@ -40,8 +40,8 @@
     }
     $this->headLink()->headLink(array('rel' => 'canonical', 'href' => $this->canonicalUrl), 'PREPEND');
 
-    if (isset($this->minify) && $this->minify === true) {
-        echo Tools_System_Minify::minify($this->headLink(), true);
+    if (!empty($this->minifyCss)) {
+        echo Tools_System_Minify::minifyCss($this->headLink(), true);
     }
     else {
         echo $this->headLink();
@@ -72,8 +72,8 @@
             ->prependFile($this->websiteUrl.'system/js/external/jquery/plugins/cookie/jquery.cookie.js');
     }
 
-    if (isset($this->minify) && $this->minify === true)  {
-        echo Tools_System_Minify::minify($this->headScript(), true);
+    if (!empty($this->minifyJs))  {
+        echo Tools_System_Minify::minifyJs($this->headScript(), true);
     }
     else {
         echo $this->headScript();
@@ -104,8 +104,8 @@
  */
     echo $this->placeholder('plugins');
 
-    if (isset($this->minify) && $this->minify === true) {
-        echo Tools_System_Minify::minify($this->inlineScript(), true);
+    if (!empty($this->minifyJs)) {
+        echo Tools_System_Minify::minifyJs($this->inlineScript(), true);
     } else {
         echo $this->inlineScript();
     }

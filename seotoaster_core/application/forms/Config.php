@@ -38,11 +38,18 @@ class Application_Form_Config extends Application_Form_Secure
 	protected $_showProtectedPagesInMenu = true;
 
     /**
-     * Enable minification css and js files
+     * Enable minification js files
      *
      * @var boolean
      */
-    protected $_enableMinify             = false;
+    protected $_enableMinifyJs             = false;
+
+    /**
+     * Enable minification css files
+     *
+     * @var boolean
+     */
+    protected $_enableMinifyCss             = false;
 
      /**
      * Enable Developer mode
@@ -223,15 +230,26 @@ class Application_Form_Config extends Application_Form_Secure
 		return $this;
 	}
 
-    public function getEnableMinify()
+    public function getEnableMinifyJs()
     {
-        return $this->_enableMinify;
+        return $this->_enableMinifyJs;
     }
 
-    public function setEnableMinify($enableMinify)
+    public function setEnableMinifyJs($enableMinifyJs)
     {
-        $this->_enableMinify = $enableMinify;
-        $this->getElement('enableMinify')->setValue($enableMinify);
+        $this->_enableMinifyJs = $enableMinifyJs;
+        $this->getElement('enableMinifyJs')->setValue($enableMinifyJs);
+    }
+
+    public function getEnableMinifyCss()
+    {
+        return $this->_enableMinifyCss;
+    }
+
+    public function setEnableMinifyCss($enableMinifyCss)
+    {
+        $this->_enableMinifyCss = $enableMinifyCss;
+        $this->getElement('enableMinifyCss')->setValue($enableMinifyCss);
     }
 
     public function getControlPanelStatus()
@@ -436,9 +454,15 @@ class Application_Form_Config extends Application_Form_Secure
 		)));
 
         $this->addElement(new Zend_Form_Element_Checkbox(array(
-            'name'  => 'enableMinify',
-            'value' => $this->_enableMinify,
-            'label' => 'Enable assets minification (css/js)?'
+            'name'  => 'enableMinifyJs',
+            'value' => $this->_enableMinifyJs,
+            'label' => 'Enable assets JS minification?'
+        )));
+
+        $this->addElement(new Zend_Form_Element_Checkbox(array(
+            'name'  => 'enableMinifyCss',
+            'value' => $this->_enableMinifyCss,
+            'label' => 'Enable assets CSS minification?'
         )));
 
         $this->addElement(new Zend_Form_Element_Checkbox(array(
