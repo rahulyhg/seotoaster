@@ -49,6 +49,12 @@ class LoginController extends Zend_Controller_Action {
 						if($authUserData->role_id == Tools_Security_Acl::ROLE_MEMBER) {
 							$this->_memberRedirect();
 						}
+                        if($authUserData->role_id == Tools_Security_Acl::ROLE_SUPERADMIN) {
+                            $adminRedirectPageModel = Application_Model_Mappers_PageMapper::getInstance()->fetchByOption('option_adminredirect', true);
+                            if ($adminRedirectPageModel instanceof Application_Model_Models_Page) {
+                                $this->_redirect($this->_helper->website->getUrl() . $adminRedirectPageModel->getUrl(), array('exit' => true));
+                            }
+                        }
 						if(isset($this->_helper->session->redirectUserTo)) {
 							$this->_redirect($this->_helper->website->getUrl() . $this->_helper->session->redirectUserTo, array('exit' => true));
 						}

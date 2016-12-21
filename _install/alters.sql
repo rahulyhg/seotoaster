@@ -133,7 +133,12 @@ ALTER TABLE `form` ADD COLUMN `admin_text` TEXT DEFAULT NULL;
 -- Add timezone for users
 ALTER TABLE `user` ADD COLUMN `timezone` VARCHAR(40) COLLATE utf8_unicode_ci DEFAULT NULL;
 
+-- 21/12/16
+-- version: 2.5.2
+INSERT INTO `page_option` (`id`, `title`, `context`, `active`, `option_usage`) VALUES
+  ('option_adminredirect',	'Page where admin will be redirected after login',	'Redirect',	1,	'once');
+
 -- These alters are always the latest and updated version of the database
-UPDATE `config` SET `value`='2.5.2' WHERE `name`='version';
+UPDATE `config` SET `value`='2.5.3' WHERE `name`='version';
 SELECT value FROM `config` WHERE name = 'version';
 
